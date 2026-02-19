@@ -6,7 +6,7 @@ SlouchStopper is a real-time posture tracker that monitors neck alignment, gives
 This is for windows
 Make sure your webcam is enabled
 
-## Installation
+## Option 1: Run With Python (Requires venv)
 1. Clone the repo:
 
 2. Create a virtual environment: python -m venv venv
@@ -17,5 +17,5 @@ Make sure your webcam is enabled
 
 5. Run the program: python main.py
 
-6. After running the program if you want to exit just click on the application and press Q
-
+# Option 2: Use the prebuilt exe
+Located in the dist folder
