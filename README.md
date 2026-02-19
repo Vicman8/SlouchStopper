@@ -17,4 +17,5 @@ Make sure your webcam is enabled
 
 5. Run the program: python main.py
 
+6. After running the program if you want to exit just click on the application and press Q
 
