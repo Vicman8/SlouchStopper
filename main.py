@@ -6,9 +6,19 @@ import math
 import time
 import collections
 import winsound  # Windows beep
+import sys
+import os
 
-# Load MediaPipe Pose model
-base_options = python.BaseOptions(model_asset_path="pose_landmarker_full.task")
+if getattr(sys, 'frozen', False):
+    # Running in PyInstaller exe
+    base_path = sys._MEIPASS
+else:
+    # Running as normal script
+    base_path = os.path.dirname(os.path.abspath(__file__))
+
+model_path = os.path.join(base_path, "pose_landmarker_full.task")
+base_options = python.BaseOptions(model_asset_path=model_path)
+
 options = vision.PoseLandmarkerOptions(
     base_options=base_options,
     running_mode=vision.RunningMode.VIDEO
@@ -18,7 +28,7 @@ pose_landmarker = vision.PoseLandmarker.create_from_options(options)
 cap = cv2.VideoCapture(0)
 
 # Posture thresholds
-SLOUCH_RATIO = 0.46       # ratio below this = slouch
+SLOUCH_RATIO = 0.5       # ratio below this = slouch
 ALERT_SECONDS = 5         # slouch duration before alert
 SMOOTHING_FRAMES = 10      # number of frames to average for smoothing
 
@@ -120,7 +130,9 @@ while cap.isOpened():
 
     cv2.imshow("SlouchStopper", frame)
 
-    if cv2.waitKey(1) & 0xFF == ord('q'):
+    key = cv2.waitKey(1) & 0xFF
+
+    if cv2.getWindowProperty("SlouchStopper", cv2.WND_PROP_VISIBLE) < 1:
         break
 
 cap.release()
