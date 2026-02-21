@@ -9,6 +9,7 @@ import winsound
 import sys
 import os
 import tkinter as tk
+import webbrowser
 from PIL import Image, ImageTk
 
 # -----------------------------
@@ -106,6 +107,29 @@ pause_button = tk.Button(
     pady=5
 )
 pause_button.pack(side="right", padx=5, pady=5)
+
+
+import webbrowser  # at the top with your imports
+
+def report_bug():
+    # Opens the Google Form in the default web browser
+    form_url = "https://forms.gle/iHbXhiTkFXc5YyU4A"
+    webbrowser.open(form_url)
+
+# Report Bug Button
+report_button = tk.Button(
+    top_frame,
+    text="🐞 Report Bug / Suggestion",
+    command=report_bug,
+    bg="#333333",
+    fg="white",
+    activebackground="#444444",
+    activeforeground="white",
+    bd=0,
+    padx=10,
+    pady=5
+)
+report_button.pack(side="right", padx=5, pady=5)
 
 video_label = tk.Label(root, bg="black")
 video_label.pack(fill="both", expand=True)
